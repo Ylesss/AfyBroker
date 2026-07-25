@@ -184,7 +184,7 @@ public class BrokerClientBuilder {
 
         processorList.forEach(brokerClient::aware);
         processorList.forEach(rpcClient::registerUserProcessor);
-        connectionEventTypeProcessorList.forEach(brokerClient::aware);
+        connectionEventTypeProcessorList.forEach(processor -> brokerClient.aware(processor.getDelegate()));
         connectionEventTypeProcessorList.forEach(processor -> rpcClient.addConnectionEventProcessor(processor.getType(), processor));
 
         return brokerClient;

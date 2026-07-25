@@ -96,6 +96,7 @@ public class BrokerServerBuilder {
         brokerServer.initServer();
 
         processorList.forEach(brokerServer::registerUserProcessor);
+        connectionEventTypeProcessorList.forEach(processor -> brokerServer.aware(processor.getDelegate()));
         connectionEventTypeProcessorList.forEach(processor -> brokerServer.addConnectionEventProcessor(processor.getType(), processor));
 
         return brokerServer;
